@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { useNavigate,useParams } from "react-router-dom";
+import { useCreateEmployeeMutation, useEmployeeByIdQuery ,useUpdateEmployeeMutation} from "../services/api";
 import InputField from "../components/InputField";
 import TextField from "../components/TextField";
 import InputSelect from "../components/InputSelect";
@@ -8,39 +8,75 @@ import Button from "../components/Button";
 import CommonHead from "../components/CommonHead";
 
 import "../styles/Styles.css";
-
 const Emp_page = () => {
+  const dept={"HR":"28ce2419-6e70-4531-b009-ca4d5283618b" ,
+              "Tech 1":"a5f44b64-8f7a-4e2a-9a36-e7ce5321fe05",
+              "Tech 2":"248c7033-f771-4286-a64b-517fb4ef5017", 
+              "Tech 3":"564c464f-fb7c-45dc-93a6-838592c08dd0"}
   const navigate = useNavigate();
-
-  const [formState, setFormState] = useState({
+  const {id} = useParams();
+  const [createEmployee,result]= useCreateEmployeeMutation()
+  const {data: EmpObj,  error, isLoading} = useEmployeeByIdQuery(id)
+const [body, setBody] = useState({
     name: "",
-    id: "",
-    date: "",
+    DateOfJoining: "",
+    departmentId:"",
     role: "",
     status: "",
     experience: "",
+    password:"password",
     address: {
-      addressLine1 : "",
-      addressLine2 : "",
+      addressline1 : "",
+      addressline2 : "",
       city : "",
       state : "",
       zipcode : ""
     },
   });
-
+  useEffect(()=>{
+    if(id){
+      console.log(EmpObj?.data)
+    setBody({
+    name: EmpObj?.data?.name,
+    DateOfJoining: EmpObj?.data?.dateOfJoining,
+    departmentId:EmpObj?.data?.departmentId,
+    role: EmpObj?.data?.role,
+    status: EmpObj?.data?.status,
+    experience:EmpObj?.data?.experience,
+    password:EmpObj?.data?.password,
+    address: {
+      addressline1 : EmpObj?.data?.address.addressLine1,
+      addressline2 : EmpObj?.data?.address.addressLine2,
+      city : EmpObj?.data?.address.city,
+      state : EmpObj?.data?.address.state,
+      zipcode : EmpObj?.data?.address.zipcode
+  }
+});
+console.log(body)}
+  }
+,[EmpObj])
+const[updateEmployee,res]=useUpdateEmployeeMutation(id,body)
   const goToNextPage = () => {
     navigate("/list");
   };
 
   const onChangeValue = (key, value) => {
-    if (key =="address"){
-
-    }
-    setFormState({
-      ...formState,
+    if (key =="addressline1"||key =="addressline2"||key =="city"||key =="state"||key =="zipcode") {
+      setBody({
+        ...body,
+        address:{
+          ...body.address,
+          [key]: value,
+        }
+      })
+      console.log(key, value);
+    } else {
+      setBody({
+      ...body,
       [key]: value,
     });
-    console.log(formState);
+
+  }
   };
 
   return (
@@ -59,20 +95,26 @@ const Emp_page = () => {
                   label="Employee Name"
                   type="text"
                   id="Name"
+                  value={body?.name}
                   placeholder="Employee Name"
                   onChange={(value) => onChangeValue("name", value)}
                 ></InputField>
               </div>
 
               <div class="element">
-                <InputField
-                  label="Employee Id"
-                  type="text"
-                  id="idno"
-                  placeholder="Employee ID"
-                  onChange={(value) => onChangeValue("id", value)}
-                ></InputField>
+                <div style={{ display: "flex", flexDirection: "column" ,marginRight: "40px"}}>
+                <label>Department</label>
+                <select onChange={(event)=>onChangeValue("departmentId",event.target.value)}>
+                    <option >Select Department</option>
+                    <option value={dept["HR"]}>Hr</option>
+                    <option value={dept["Tech 1"]}>Tech 1</option>
+                    <option value={dept["Tech 2"]}>Tech 2</option>
+                    <option value={dept["Tech 3"]}>Tech 3</option>
+                </select>
+                </div>
               </div>
+                  {/* onChange={(value) => onChangeValue("departmentId", value)}
+                ></InputField> */}
 
               <div class="element">
                 <InputField
@@ -80,38 +122,42 @@ const Emp_page = () => {
                   type="text"
                   id="datet"
                   placeholder="Joining Date"
-                  onChange={(value) => onChangeValue("date", value)}
+                  value={body?.DateOfJoining}
+                  onChange={(value) => onChangeValue("DateOfJoining", value)}
                 ></InputField>
               </div>
               <div class="element">
-                <InputSelect
-                  label="Role"
-                  onChange={(value) => onChangeValue("role", value)}
-                  options={[
-                    { key: "Dev", label: "Developer" },
-                    { key: "QA", label: "QA" },
-                    { key: "DevOps", label: "DevOps" },
-                  ]}
-                />
+                <div style={{ display: "flex", flexDirection: "column" ,marginRight: "40px"}}>
+                <label>Role</label>
+                <select onChange={(event)=>onChangeValue("role",event.target.value)}>
+                    <option >Select Role</option>
+                    <option value={"Developer"}>Developer</option>
+                    <option value={"Hr"}>Hr</option>
+                    <option value={"DevOps"}>DevOps</option>
+                    <option value={"QA"}>QA</option>
+                    <option value={"Admin"}>Admin</option>
+                </select>
+                </div>
               </div>
               <div class="element">
-                <InputSelect
-                  label="Status"
-                  onChange={(value) => onChangeValue("status", value)}
-                  options={[
-                    { key: "Intern", label: "Intern" },
-                    { key: "Trainee", label: "Trainee" },
-                    { key: "Employee", label: "Employee" },
-                  ]}
-                />
+              <div style={{ display: "flex", flexDirection: "column" ,marginRight: "40px"}}>
+                <label>Status</label>
+                <select onChange={(event)=>onChangeValue("status",event.target.value)}>
+                    <option >Select Status</option>
+                    <option value={"Active"}>Active</option>
+                    <option value={"Probation"}>Probation</option>
+                    <option value={"Inactive"}>Inactive</option>
+                </select>
+                </div>
               </div>
               <div class="element">
                 <InputField
                   label="Experience"
                   type="text"
                   id="num"
+                  value={body?.experience}
                   placeholder="Experience"
-                  onChange={(value) => onChangeValue("experience", value)}
+                  onChange={(value) => onChangeValue("experience", Number(value))}
                 ></InputField>
               </div>
               <div class="element">
@@ -120,7 +166,8 @@ const Emp_page = () => {
                   type="text"
                   id="addressLine1"
                   placeholder="Address Line 1"
-                  onChange={(value) => onChangeValue("address", value)}
+                  value={body?.address.addressline1}
+                  onChange={(value) => onChangeValue("addressline1", value)}
                 ></InputField>
               </div>
               <div class="element">
@@ -128,8 +175,9 @@ const Emp_page = () => {
                   label="Address Line 2"
                   type="text"
                   id="addressLine2"
+                  value={body?.address.addressline2}
                   placeholder="Address Line 2"
-                  onChange={(value) => onChangeValue("address", value)}
+                  onChange={(value) => onChangeValue("addressline2", value)}
                 ></InputField>
               </div>
               <div class="element">
@@ -138,7 +186,8 @@ const Emp_page = () => {
                   type="text"
                   id="city"
                   placeholder="City"
-                  onChange={(value) => onChangeValue("address", value)}
+                  value={body?.address.city}
+                  onChange={(value) => onChangeValue("city", value)}
                 ></InputField>
               </div>
               <div class="element">
@@ -147,7 +196,8 @@ const Emp_page = () => {
                   type="text"
                   id="state"
                   placeholder="State"
-                  onChange={(value) => onChangeValue("address", value)}
+                  value={body?.address.state}
+                  onChange={(value) => onChangeValue("state", value)}
                 ></InputField>
               </div>
               <div class="element">
@@ -156,7 +206,8 @@ const Emp_page = () => {
                   type="text"
                   id="zipcode"
                   placeholder="Zipcode"
-                  onChange={(value) => onChangeValue("address", value)}
+                  value={body?.address.zipcode}
+                  onChange={(value) => onChangeValue("zipcode", value)}
                 ></InputField>
               </div>
 
@@ -170,21 +221,25 @@ const Emp_page = () => {
               </div>
               </div>
               <div class="rowl">
-                  <Button
+                {id? <Button
                     id="sub"
                     label="Submit"
-                    onclick={formState}
+                    handleClick={()=>{updateEmployee({id,body});goToNextPage()}}
                     onmouseout="def(event)"
                     onmousedown="myFunction(event)"
-                  ></Button>
+                  ></Button>: <Button
+                  id="sub"
+                  label="Create"
+                  handleClick={()=>{createEmployee(body);goToNextPage()}}
+                  onmouseout="def(event)"
+                  onmousedown="myFunction(event)"
+                  body={body}
+                ></Button>}
                   <Button
                   id= "cancel"
                     label="Cancel"
+                    handleClick={()=>goToNextPage()}
                   ></Button>
-                <Button
-                  label="Go to employee List page"
-                  handleClick={goToNextPage}
-                />
               </div>
         </section>
         </div>

@@ -11,6 +11,7 @@
   color: white;
   margin-right: 50px;
   border-color: #03AEEE;
+  border: 0px;
 }
 #cancel{
 
@@ -38,6 +39,7 @@ aside {
   left: 0;
   background-color: white;
   box-shadow: 0px 60px 6px #00000029;
+  z-index: 1;
 }
 #body {
   margin-left: 280px;
@@ -53,6 +55,8 @@ aside {
   background-color: white;
   box-shadow: 0px 3px 6px #9D9D9D29;
   border-radius: 10px;
+  align-items: center;
+  margin-right: 30px
 }
 .row {
   display: flex;
@@ -109,7 +113,7 @@ select {
   height: 40px;
   padding-left: 7px;
 }
-#formBody {
+#formBody ,#dataBody {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
@@ -120,11 +124,18 @@ select {
   padding-left:20px;
 
 }
-#inputfield{
+#inputfield,#datafield{
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 2;
   justify-content: space-around;
+}
+#field{
+  display: flex;
+  flex-wrap: wrap;
+}
+#datafield{
+  justify-content: left;
 }
 #logo {
   padding: 20px;
@@ -145,7 +156,7 @@ a {
   padding-bottom: 20px;
   padding-left: 20px;
 }
-.element {
+.element{
   display: flex;
   flex-direction: column;
   margin: 15px;
@@ -206,4 +217,23 @@ h1{
   width:125px;
   height:35px;
   background-color: white;
+}
+.fieldhead{
+color:#8B8D9D
+}
+.dataelement {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  margin-bottom: 25px;
+  width: 250px;
+}
+#login{
+  background: #03AEEE 0% 0% no-repeat padding-box;
+box-shadow: 0px 3px 6px #B0E6FA;
+border-radius: 3px;
+opacity: 1;
+width: 450px;
+height: 40px;
+border-width: 0px;
 }

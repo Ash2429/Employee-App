@@ -3,22 +3,14 @@ const initialState = {
  value:0
 }
 
-export const counterSlice = createSlice({
-    name: 'counter',
+export const dataSlice = createSlice({
+    name: 'data',
     initialState,
     reducers:{
-        increment : (state)=>{
-
-        state.value +=1
-    },
-        decrement : (state)=>{
-
-            state.value -=1
-        },
-        incrementByAmount :(state,action)=>{
-            state.value += action.payload
+        set :(state,newval)=>{
+            state.value = newval
         },
     }
 })
-export const {increment , decrement , incrementByAmount} =counterSlice.actions
-export default counterSlice.reducer
+export const {set} =dataSlice.actions
+export default dataSlice.reducer
