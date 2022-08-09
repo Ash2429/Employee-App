@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate,useParams } from "react-router-dom";
-import { useCreateEmployeeMutation, useEmployeeByIdQuery ,useUpdateEmployeeMutation} from "../services/api";
-import InputField from "../components/InputField";
-import TextField from "../components/TextField";
-import InputSelect from "../components/InputSelect";
-import Button from "../components/Button";
-import CommonHead from "../components/CommonHead";
+import { useCreateEmployeeMutation, useEmployeeByIdQuery ,useUpdateEmployeeMutation} from "../../services/api";
+import InputField from "../../components/InputField";
+import TextField from "../../components/TextField";
+import InputSelect from "../../components/InputSelect";
+import Button from "../../components/Button";
+import CommonHead from "../../components/CommonHead";
 
-import "../styles/Styles.css";
+import "../../styles/Styles.css";
 const Emp_page = () => {
   const dept={"HR":"28ce2419-6e70-4531-b009-ca4d5283618b" ,
               "Tech 1":"a5f44b64-8f7a-4e2a-9a36-e7ce5321fe05",

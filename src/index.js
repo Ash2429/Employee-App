@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
-import Emp_page from './pages/CreateEmployees';
-import LogInPage from './pages/Login';
-import EmployeeList from './pages/EmployeeList';
+import Emp_page from './pages/CreateEmployee/CreateEmployees';
+import LogInPage from './pages/Login/Login';
+import EmployeeList from './pages/EmployeeList/EmployeeList';
 import Counter from './pages/counter';
 import { store } from './store/store';
 import { Provider } from "react-redux"
-import Employee from './pages/Employee';
+import Employee from './pages/Employee/Employee';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -19,6 +19,7 @@ root.render(
       <Routes >
         <Route path="/" element={<LogInPage/>}/>
         <Route path="/list" element={<EmployeeList/>}/>
+        <Route path="/list/:status" element={<EmployeeList/>}/>
         <Route path="/create" element={<Emp_page/>}/>
         <Route path="/counter" element={<Counter/>}/>
         <Route path="/employee/:id" element={<Employee/>}/>

@@ -3,7 +3,7 @@ import Button from "./components/Button";
 import InputField from "./components/InputField";
 import { useEffect, useState } from "react";
 import TextField from "./components/TextField";
-import Emp_page from "./pages/CreateEmployees";
+import Emp_page from "./pages/CreateEmployee/CreateEmployees";
 import { configureStore } from "@reduxjs/toolkit";
 
 export const store = configureStore({

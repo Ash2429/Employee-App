@@ -1,10 +1,10 @@
 
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { useParams } from "react-router-dom";
-import { useEmployeeByIdQuery } from "../services/api";
-import CommonHead from "../components/CommonHead";
+import { useEmployeeByIdQuery } from "../../services/api";
+import CommonHead from "../../components/CommonHead";
 import { useNavigate } from "react-router-dom";
-import "../styles/details.css"
+import "../../styles/details.css"
 
 const Employee=()=>{
   const {id} = useParams();

@@ -1,9 +1,9 @@
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import InputField from "../components/InputField";
-import { useLoginMutation } from "../services/api";
+import InputField from "../../components/InputField";
+import { useLoginMutation } from "../../services/api";
 import { useState } from "react";
-import { setStorage} from "../services/utils.js"
+import { setStorage} from "./../../services/utils.js"
 const LogInPage=()=>{
     const navigate = useNavigate();
     const goToNextPage =()=>{navigate('/list');};
@@ -26,10 +26,10 @@ const LogInPage=()=>{
     }
     return(
         <div style={{display:"flex",width:"calc(100%)",height:"100%"}}>
-            <img src={require("../styles/login.png")} style={{padding:"60px",paddingLeft:"80px",maxHeight:"48%",maxWidth:"48%"}}></img>
+            <img src={require("./../../styles/login.png")} style={{padding:"60px",paddingLeft:"80px",maxHeight:"48%",maxWidth:"48%"}}></img>
             <div style={{display:"flex",padding:"18%",paddingLeft:"15%"}}>  
             <div>
-                <img src={require("../styles/kvlogo.png")} style={{paddingBottom:"20px"}}></img>
+                <img src={require("./../../styles/kvlogo.png")} style={{paddingBottom:"20px"}}></img>
             <InputField 
                   label="Username"
                   type="text"

@@ -36,6 +36,14 @@ prepareHeaders: (headers) => {
       }
     }, providesTags:["dETAILS"]
 }),
+getEmployeeByStatus:builder.query({
+  query(status) {
+    return {
+      url: `/employee/${status}`,
+      method: 'GET'
+    }
+  }, providesTags:["dETAILS"]
+}),
   deleteemployee:builder.mutation({
   query(id) {
     return {
@@ -68,5 +76,5 @@ login:builder.mutation({
 })
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const{ useGetEmployeeQuery , useCreateEmployeeMutation , useDeleteemployeeMutation, useEmployeeByIdQuery , useUpdateEmployeeMutation , useLoginMutation} = baseApi
+export const{ useGetEmployeeQuery , useCreateEmployeeMutation , useDeleteemployeeMutation, useEmployeeByIdQuery , useUpdateEmployeeMutation , useLoginMutation , useGetEmployeeByStatusQuery} = baseApi
 export default baseApi

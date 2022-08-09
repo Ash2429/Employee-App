@@ -38,7 +38,7 @@ const Table = ({ obj }) => {
           <th>Action</th>
         </tr>
       </div>
-      {obj?.data?.map((item) => (
+      {obj?.map((item) => (
         <div class="tbrow">
           <tr
             class="rowelement"
