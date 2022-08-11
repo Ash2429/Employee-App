@@ -1,9 +1,10 @@
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { useGetEmployeeQuery ,useGetEmployeeByStatusQuery} from "../../services/api";
+import { useGetEmployeeQuery ,useGetEmployeeByStatusQuery} from "./api";
 import CommonHead from "../../components/CommonHead";
 import Table from "../../components/Table";
 import "../../styles/Styles.css"
+import "../../styles/listpage.css"
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 

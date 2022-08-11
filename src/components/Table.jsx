@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { set } from "../store/slices/Counterslice";
 import { dataSlice } from "../store/slices/Counterslice";
 import { useSelector, useDispatch } from "react-redux";
-import { useDeleteemployeeMutation } from "../services/api";
+import { useDeleteemployeeMutation } from "../pages/EmployeeList/api";
 
 const Table = ({ obj }) => {
   const [deleteEmployee, result] = useDeleteemployeeMutation();

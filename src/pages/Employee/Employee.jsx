@@ -1,12 +1,16 @@
 
 import Button from "../../components/Button";
 import { useParams } from "react-router-dom";
-import { useEmployeeByIdQuery } from "../../services/api";
+import { useEmployeeByIdQuery } from "./api";
 import CommonHead from "../../components/CommonHead";
 import { useNavigate } from "react-router-dom";
 import "../../styles/details.css"
 
 const Employee=()=>{
+  const dept={"HR":"28ce2419-6e70-4531-b009-ca4d5283618b" ,
+              "Tech 1":"a5f44b64-8f7a-4e2a-9a36-e7ce5321fe05",
+              "Tech 2":"248c7033-f771-4286-a64b-517fb4ef5017", 
+              "Tech 3":"564c464f-fb7c-45dc-93a6-838592c08dd0"}
   const {id} = useParams();
   const navigate = useNavigate();
   const goToNextPage =()=>{navigate(`/edit/${id}`)}
@@ -59,8 +63,12 @@ const Employee=()=>{
                 <label class="fielddata">{EmpObj?.data?.address.addressLine1+" "+EmpObj?.data?.address.addressLine2+", "+EmpObj?.data?.address.city+", "+EmpObj?.data?.address.state+", "+EmpObj?.data?.address.zipcode}</label>
               </div>
               <div class="dataelement">
+              <label class="fieldhead">Department</label>
+                <label class="fielddata">{Object.keys(dept).find(key => dept[key] === EmpObj?.data?.departmentId)}</label>
+              </div>
+              <div class="dataelement">
               <label class="fieldhead">ID Proof</label>
-                <label class="fielddata">dataelement</label>
+                <label class="fielddata"><img src={require("../../styles/file.png")}/></label>
               </div>
               </div>
         </section>

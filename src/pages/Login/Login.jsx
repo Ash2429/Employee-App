@@ -1,7 +1,7 @@
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import InputField from "../../components/InputField";
-import { useLoginMutation } from "../../services/api";
+import { useLoginMutation } from "./api";
 import { useState } from "react";
 import { setStorage} from "./../../services/utils.js"
 const LogInPage=()=>{

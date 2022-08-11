@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate,useParams } from "react-router-dom";
-import { useCreateEmployeeMutation, useEmployeeByIdQuery ,useUpdateEmployeeMutation} from "../../services/api";
+import { useCreateEmployeeMutation, useEmployeeByIdQuery ,useUpdateEmployeeMutation} from "./api";
 import InputField from "../../components/InputField";
-import TextField from "../../components/TextField";
-import InputSelect from "../../components/InputSelect";
 import Button from "../../components/Button";
 import CommonHead from "../../components/CommonHead";
 
@@ -43,7 +41,7 @@ const [body, setBody] = useState({
     role: EmpObj?.data?.role,
     status: EmpObj?.data?.status,
     experience:EmpObj?.data?.experience,
-    password:EmpObj?.data?.password,
+    password:"password",
     address: {
       addressline1 : EmpObj?.data?.address.addressLine1,
       addressline2 : EmpObj?.data?.address.addressLine2,
